@@ -1,2 +1,0 @@
-G:\ShooterGame\Shooter\Intermediate\Build\Win64\UE4Editor\Development\MyProject\Definitions.MyProject.h
-G:\ShooterGame\Shooter\Source\MyProject\MyProject.h

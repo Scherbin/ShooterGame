@@ -1,3 +1,0 @@
-G:\ShooterGame\Shooter\Intermediate\Build\Win64\UE4Editor\Development\MyProject\Definitions.MyProject.h
-G:\ShooterGame\Shooter\Source\MyProject\Public\MyActor.h
-G:\ShooterGame\Shooter\Intermediate\Build\Win64\UE4Editor\Inc\MyProject\MyActor.generated.h
