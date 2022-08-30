@@ -1,0 +1,5 @@
+G:\ShooterGame\Shooter\Intermediate\Build\Win64\UE4Editor\Development\MyProject\Definitions.MyProject.h
+G:\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+G:\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+G:\ShooterGame\Shooter\Source\MyProject/Public/MyActor.h
+G:\ShooterGame\Shooter\Intermediate\Build\Win64\UE4Editor\Inc\MyProject\MyActor.generated.h
