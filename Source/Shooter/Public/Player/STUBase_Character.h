@@ -21,6 +21,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Caregory = "Components")
 		UCameraComponent* CameraComponent;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -30,5 +31,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+private:
 
+	void MoveForvard(float Amount);
+	void MoveRight(float Amount);
 };

@@ -3,6 +3,7 @@
 
 #include "Player/STUBase_Character.h"
 #include"Camera/CameraComponent.h"
+#include "Components/InputComponent.h"
 
 // Sets default values
 ASTUBase_Character::ASTUBase_Character()
@@ -33,5 +34,18 @@ void ASTUBase_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis("MoveForvard", this, &ASTUBase_Character::MoveForvard);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ASTUBase_Character::MoveRight);
 }
+
+void ASTUBase_Character::MoveForvard(float Amount)
+{
+	AddMovementInput(GetActorForwardVector(),Amount);
+}
+
+void ASTUBase_Character::MoveRight(float Amount)
+{
+	AddMovementInput(GetActorRightVector(), Amount);
+}
+
 
