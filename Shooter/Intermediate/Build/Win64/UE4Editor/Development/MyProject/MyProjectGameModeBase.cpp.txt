@@ -1,7 +1,0 @@
-G:\ShooterGame\Shooter\Intermediate\Build\Win64\UE4Editor\Development\MyProject\Definitions.MyProject.h
-G:\ShooterGame\Shooter\Source\MyProject\MyProjectGameModeBase.h
-G:\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
-G:\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
-G:\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ServerStatReplicator.generated.h
-G:\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameModeBase.generated.h
-G:\ShooterGame\Shooter\Intermediate\Build\Win64\UE4Editor\Inc\MyProject\MyProjectGameModeBase.generated.h
