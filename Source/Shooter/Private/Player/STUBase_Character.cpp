@@ -33,7 +33,6 @@ void ASTUBase_Character::BeginPlay()
 void ASTUBase_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -56,12 +55,14 @@ void ASTUBase_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 void ASTUBase_Character::MoveForvard(float Amount)
 {
 	IsMovingForvard = Amount > 0.0f;
+	if (Amount == 0.0f) return;
 	AddMovementInput(GetActorForwardVector(),Amount);
 }
 
 void ASTUBase_Character::MoveRight(float Amount)
 {
-	AddMovementInput(GetActorRightVector(), Amount);
+	if (Amount == 0.0f) return;
+	AddMovementInput(GetActorRightVector(), Amount); 
 }
 
 void ASTUBase_Character::OnStartRunning()
@@ -77,6 +78,17 @@ void ASTUBase_Character::OnStopRunning()
 bool ASTUBase_Character::IsRunning() const
 {
 	return WantsToRun && IsMovingForvard && !GetVelocity().IsZero();
+}
+
+float ASTUBase_Character::GetMovementDirection() const
+{
+	if (GetVelocity().IsZero()) return 0.0f;
+	const auto VelocityNormal = GetVelocity().GetSafeNormal();
+	const auto AngleBetween = FMath::Acos(FVector::DotProduct(GetActorForwardVector(), VelocityNormal));
+	const auto CrossProduct = FVector::CrossProduct(GetActorForwardVector(), VelocityNormal);
+	const auto Degrees = FMath::RadiansToDegrees(AngleBetween);
+	return CrossProduct.IsZero() ? Degrees : Degrees* FMath::Sign(CrossProduct.Z);
+		
 }
 
 
