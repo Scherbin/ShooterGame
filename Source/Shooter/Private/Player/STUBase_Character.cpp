@@ -43,7 +43,9 @@ void ASTUBase_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAxis("MoveRight", this, &ASTUBase_Character::MoveRight);
 	PlayerInputComponent->BindAxis("LookUp", this, &ASTUBase_Character::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("TurnAround", this, &ASTUBase_Character::AddControllerYawInput);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed,this, &ASTUBase_Character::Jump);
 }
+
 
 void ASTUBase_Character::MoveForvard(float Amount)
 {
