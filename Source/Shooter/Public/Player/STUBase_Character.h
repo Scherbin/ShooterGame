@@ -16,7 +16,7 @@ class SHOOTER_API ASTUBase_Character : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	ASTUBase_Character();
+	ASTUBase_Character(const FObjectInitializer& ObjInit);
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
@@ -34,10 +34,18 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		bool IsRunning() const;
+
 private:
+
+	bool WantsToRun = false;
+	bool IsMovingForvard = false;
 
 	void MoveForvard(float Amount);
 	void MoveRight(float Amount);
 
-	
+	void OnStartRunning();
+	void OnStopRunning();
 };
