@@ -29,8 +29,10 @@ public:
 	float Damage = 10.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool DoFullDamage = false;
+	bool DoFullDamage = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UDamageType>DamageType;
 
 protected:
 	// Called when the game starts or when spawned
