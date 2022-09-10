@@ -13,5 +13,4 @@ UCLASS()
 class SHOOTER_API ASTUPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
 };

@@ -39,7 +39,11 @@ void ASTUBase_Character::BeginPlay()
 	
 	check(HealthComponent);
 	check(HealthTextComponent);
+	check(GetCharacterMovement());
 
+	OnHealthChanged(HealthComponent->GetHealth());
+	HealthComponent->OnDeath.AddUObject(this, &ASTUBase_Character::OnDeath);
+	HealthComponent->OnHealthChanged.AddUObject(this, &ASTUBase_Character::OnHealthChanged);
 }
 	
 
@@ -49,14 +53,7 @@ void ASTUBase_Character::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	const auto Health = HealthComponent->GetHealth();
-	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
-
-	
 }
-
-
-
-
 
 void ASTUBase_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -70,9 +67,6 @@ void ASTUBase_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ASTUBase_Character::OnStartRunning);
 	PlayerInputComponent->BindAction("Run", IE_Released, this, &ASTUBase_Character::OnStopRunning);
 }
-
-
-
 
 void ASTUBase_Character::MoveForvard(float Amount)
 {
@@ -110,8 +104,18 @@ float ASTUBase_Character::GetMovementDirection() const
 	const auto CrossProduct = FVector::CrossProduct(GetActorForwardVector(), VelocityNormal);
 	const auto Degrees = FMath::RadiansToDegrees(AngleBetween);
 	return CrossProduct.IsZero() ? Degrees : Degrees* FMath::Sign(CrossProduct.Z);
-		
 }
 
+void ASTUBase_Character::OnDeath()
+{
+	UE_LOG(BaseCharacterLog, Display, TEXT("PLAYER  IS DEAD"));
 
+	PlayAnimMontage(DeathAnimMontage);
+	GetCharacterMovement()->DisableMovement();
+	SetLifeSpan(5.0f);
+}
 
+void ASTUBase_Character::OnHealthChanged(float Health)
+{
+	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
+}

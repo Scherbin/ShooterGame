@@ -19,7 +19,6 @@ ASTUDevDamageActor::ASTUDevDamageActor()
 void ASTUDevDamageActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame

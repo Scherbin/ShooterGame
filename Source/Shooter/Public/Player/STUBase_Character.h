@@ -32,9 +32,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USTUHealthComponent* HealthComponent;
 
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UTextRenderComponent* HealthTextComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* DeathAnimMontage;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -43,7 +45,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable, Category = "Movement")
@@ -52,11 +53,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	float GetMovementDirection() const;
 
-	
-
-
 private:
-
 	bool WantsToRun = false;
 	bool IsMovingForvard = false;
 	
@@ -66,5 +63,6 @@ private:
 	void OnStartRunning();
 	void OnStopRunning();
 
-	
+	void OnDeath();
+	void OnHealthChanged(float Health);
 };
