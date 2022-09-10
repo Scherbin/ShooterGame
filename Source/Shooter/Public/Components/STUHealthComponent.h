@@ -6,10 +6,10 @@
 #include "Components/ActorComponent.h"
 #include "STUHealthComponent.generated.h"
 
-DECLARE_MULTICAST_DELEGATE(FONDeath)
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthChanged,float)
+DECLARE_MULTICAST_DELEGATE(FONDeath);
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthChanged, float);
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class SHOOTER_API USTUHealthComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -18,14 +18,14 @@ public:
 
 	USTUHealthComponent();
 
-	float GetHealth() const { return Health; }
+	FONDeath OnDeath;
+
+	FOnHealthChanged OnHealthChanged;
 
 	UFUNCTION(BlueprintCallable)
 	bool IsDead() const { return FMath::IsNearlyZero(Health); }
 
-	FONDeath OnDeath;
-
-	FOnHealthChanged OnHealthChanged;
+	float GetHealth() const { return Health; }
 
 protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite, Category = "Health", meta = (ClampMin = "0.0", ClampMax = "1000.0"))
