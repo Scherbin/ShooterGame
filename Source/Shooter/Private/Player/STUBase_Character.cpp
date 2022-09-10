@@ -8,16 +8,16 @@
 #include "Components/STUCharacterMovementComponent.h"
 #include "Components/STUHealthComponent.h"
 #include "Components/TextRenderComponent.h"
+#include "Components/STUWeaponComponent.h"
 #include "GameFramework/Controller.h"
-#include "Weapon/STUBaseWeapon.h"
+
 
 DEFINE_LOG_CATEGORY_STATIC(BaseCharacterLog, All, All)
 
-// Sets default values
+
 ASTUBase_Character::ASTUBase_Character(const FObjectInitializer& ObjInit)
 	:Super(ObjInit.SetDefaultSubobjectClass<USTUCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>("SpringArmComponent");
@@ -33,9 +33,10 @@ ASTUBase_Character::ASTUBase_Character(const FObjectInitializer& ObjInit)
 	HealthTextComponent = CreateDefaultSubobject<UTextRenderComponent>("HealthTextComponent");
 	HealthTextComponent->SetupAttachment(GetRootComponent());
 	HealthTextComponent->SetOwnerNoSee(true);
+
+	WeaponComponent= CreateDefaultSubobject<USTUWeaponComponent>("WeaponComponent");
 }
 
-// Called when the game starts or when spawned
 void ASTUBase_Character::BeginPlay()
 {
 	Super::BeginPlay();
@@ -50,7 +51,6 @@ void ASTUBase_Character::BeginPlay()
 
 	LandedDelegate.AddDynamic(this, &ASTUBase_Character::OnGroundLanded);
 
-	SpawnWeapon();
 }
 	
 
@@ -66,6 +66,7 @@ void ASTUBase_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	check(PlayerInputComponent);
+	check(WeaponComponent);
 
 	PlayerInputComponent->BindAxis("MoveForvard", this, &ASTUBase_Character::MoveForvard);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ASTUBase_Character::MoveRight);
@@ -74,6 +75,7 @@ void ASTUBase_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAction("Jump", IE_Pressed,this, &ASTUBase_Character::Jump);
 	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ASTUBase_Character::OnStartRunning);
 	PlayerInputComponent->BindAction("Run", IE_Released, this, &ASTUBase_Character::OnStopRunning);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, WeaponComponent, &USTUWeaponComponent::Fire);
 }
 
 void ASTUBase_Character::MoveForvard(float Amount)
@@ -142,14 +144,4 @@ void ASTUBase_Character::OnGroundLanded(const FHitResult& Hit)
 	const auto FinalDamage = FMath::GetMappedRangeValueClamped(LandedDamageVelocity, LandedDamage, FallVelocityZ);
 
 	TakeDamage(FinalDamage, FDamageEvent{}, nullptr, nullptr );
-}
-void ASTUBase_Character :: SpawnWeapon()
-{
-	if (!GetWorld()) return;
-	const auto Weapon = GetWorld()->SpawnActor<ASTUBaseWeapon>(WeaponClass);
-	if (Weapon)
-	{
-		FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, false);
-		Weapon->AttachToComponent(GetMesh(), AttachmentRules, "WeaponSocket");
-	}
 }

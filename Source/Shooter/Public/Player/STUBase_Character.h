@@ -6,13 +6,12 @@
 #include "GameFramework/Character.h"
 #include "STUBase_Character.generated.h"
 
-
 class UCameraComponent;
 class USpringArmComponent;
 class USTUHealthComponent;
 class USTUHealthComponent;
 class UTextRenderComponent;
-class ASTUBaseWeapon;
+class USTUWeaponComponent;
 
 UCLASS()
 class SHOOTER_API ASTUBase_Character : public ACharacter
@@ -35,6 +34,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	UTextRenderComponent* HealthTextComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+	USTUWeaponComponent* WeaponComponent;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* DeathAnimMontage;
 
@@ -46,9 +48,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
 	FVector2D LandedDamage = FVector2D(10.0f, 100.0f);
-
-	UPROPERTY(EditDefaultsOnly, Category = "Weapon")
-		TSubclassOf<ASTUBaseWeapon> WeaponClass;
 
 	virtual void BeginPlay() override;
 
@@ -79,5 +78,4 @@ private:
 	UFUNCTION()
 	void OnGroundLanded(const FHitResult& Hit);
 
-	void SpawnWeapon();
 };
