@@ -26,6 +26,7 @@ void ASTULauncherWeapon::MakeShot()
 	if (Projecttile)
 	{
 		Projecttile->SetShotDirection(Direction);
+		Projecttile->SetOwner(GetOwner());
 		Projecttile->FinishSpawning(SpawnTransform);
 	}
 }
