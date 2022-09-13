@@ -12,7 +12,6 @@ class ASTUBaseWeapon;
 USTRUCT(BlueprintType)
 struct FWeaponData
 {
-	//GENERATED_USTRACT_BODY()
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
@@ -77,6 +76,10 @@ private:
 	bool CanFire() const;
 	bool CanEquip() const;
 	bool CanReload() const;
+
+	void OnEmptyClip();
+	void ChangeClip();
+
 	template<typename T>
 	T* FindNotifyByClass(UAnimSequenceBase* Animation)
 	{
