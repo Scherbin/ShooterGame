@@ -176,6 +176,15 @@ void USTUWeaponComponent::Reload()
 {
 	ChangeClip();
 }
+bool USTUWeaponComponent::GetWeaponUIData(FWeaponUIData& UIData) const
+{
+	if (CurrentWeapon)
+	{
+		UIData = CurrentWeapon->GetUIData();
+		return true;
+	}
+	return false;
+}
 void USTUWeaponComponent::OnEmptyClip()
 {
 	ChangeClip();
