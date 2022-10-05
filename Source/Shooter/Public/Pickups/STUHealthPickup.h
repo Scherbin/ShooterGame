@@ -14,4 +14,6 @@ class SHOOTER_API ASTUHealthPickup : public ASTUBasePickup
 {
 	GENERATED_BODY()
 	
+private:
+	virtual bool GivePickupTo(APawn* PlayerPawn) override;
 };
