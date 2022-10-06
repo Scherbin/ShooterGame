@@ -8,29 +8,34 @@
 #include "DrawDebugHelpers.h"
 #include "STURifleWeapon.generated.h"
 
-/**
- * 
- */
+class USTUWeaponFXComponent;
+
 UCLASS()
 class SHOOTER_API ASTURifleWeapon : public ASTUBaseWeapon
 {
 	GENERATED_BODY()
 
 public:
+	ASTURifleWeapon();
+
 	virtual void StartFire()override;
 	virtual void StopFire()override;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-		float TimeBetweenShots = 0.1f;
+	float TimeBetweenShots = 0.1f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-		float BulletSpread = 1.5f;
+	float BulletSpread = 1.5f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-		float DamageAmount = 10.0f;
+	float DamageAmount = 10.0f;
 
-	virtual void MakeShot()override;
+	UPROPERTY(VisibleAnywhere, Category="VFX")
+	USTUWeaponFXComponent* WeaponFXComponent;
+
+	virtual void BeginPlay() override;
+	virtual void MakeShot() override;
 	virtual bool GetTraceData(FVector& TraceStart, FVector& TraceEnd) const;
 private:
 	FTimerHandle ShotTimerHandle;

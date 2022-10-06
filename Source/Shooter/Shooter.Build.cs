@@ -8,7 +8,7 @@ public class Shooter : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Niagara" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
@@ -19,7 +19,8 @@ public class Shooter : ModuleRules
 		  "Shooter/Public/Weapon",
 		  "Shooter/Public/UI",
 		  "Shooter/Public/Animations",
-		  "Shooter/Public/Pickups"
+		  "Shooter/Public/Pickups",
+		  "Shooter/Public/Weapon/Component",
 		});
 
 		// Uncomment if you are using Slate UI
