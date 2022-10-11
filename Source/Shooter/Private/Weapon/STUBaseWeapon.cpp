@@ -7,6 +7,8 @@
 #include "DrawDebugHelpers.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogBaseWeapon, All, All);
 
@@ -18,7 +20,6 @@ ASTUBaseWeapon::ASTUBaseWeapon()
 	WeaponMesh = CreateDefaultSubobject < USkeletalMeshComponent>("WeaponMesh");
 	SetRootComponent(WeaponMesh);
 }
-
 
 void ASTUBaseWeapon::BeginPlay()
 {
@@ -87,6 +88,7 @@ void ASTUBaseWeapon::MakeHit(FHitResult& HitResult, const FVector& TraceStart, c
 
 	GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECollisionChannel::ECC_Visibility, CollisionParams);
 }
+
 void ASTUBaseWeapon::DecreaseAmmo()
 {
 	if (CurrentAmmo.Bullets == 0)
@@ -101,10 +103,12 @@ void ASTUBaseWeapon::DecreaseAmmo()
 		OnClipEmpty.Broadcast(this);
 	}
 }
+
 bool ASTUBaseWeapon::IsAmmoEmpty() const
 {
 	return !CurrentAmmo.Infinite && CurrentAmmo.Clips==0 && IsClipEmpty();
 }
+
 bool ASTUBaseWeapon::IsClipEmpty() const
 {
 	return CurrentAmmo.Bullets == 0;
@@ -132,7 +136,7 @@ void ASTUBaseWeapon::LogAmmo()
 {
 	FString AmmoInfo = "Ammo: " + FString::FromInt(CurrentAmmo.Bullets) + " / ";
 	AmmoInfo += CurrentAmmo.Infinite ? "Infinite" : FString::FromInt(CurrentAmmo.Clips);
-} 
+}
 
 bool ASTUBaseWeapon::IsAmmoFull() const
 {
@@ -166,4 +170,9 @@ bool ASTUBaseWeapon::TryToAddAmmo(int32 ClipsAmount)
 	}
 
 	return true;
+}
+
+UNiagaraComponent* ASTUBaseWeapon::SpawnMuzzleFX()
+{
+	return UNiagaraFunctionLibrary::SpawnSystemAttached(MuzzleFX, WeaponMesh, MuzzleSocketName, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::SnapToTarget, true);
 }
