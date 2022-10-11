@@ -29,6 +29,7 @@ public class Shooter : ModuleRules
 		  "Shooter/Public/Animations",
 		  "Shooter/Public/Pickups",
 		  "Shooter/Public/Weapon/Component",
+		  "Shooter/Public/AI"
 		});
 
 		// Uncomment if you are using Slate UI
