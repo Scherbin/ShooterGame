@@ -7,7 +7,7 @@
 #include"DrawDebugHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "Weapon/Component/STUWeaponFXComponent.h"
-#include "STURifleWeapon.generated.h"
+
 
 
 ASTUProjecttile::ASTUProjecttile()

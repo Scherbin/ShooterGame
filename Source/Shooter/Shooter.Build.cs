@@ -33,7 +33,8 @@ public class Shooter : ModuleRules
 		  "Shooter/Public/Weapon/Component",
 		  "Shooter/Public/AI",
 		  "Shooter/Public/AI/Tasks",
-		  "Shooter/Public/AI/Services"
+		  "Shooter/Public/AI/Services",
+		  "Shooter/Public/AI/EQS"
 		});
 
 		// Uncomment if you are using Slate UI
