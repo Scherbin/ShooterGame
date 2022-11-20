@@ -17,7 +17,7 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-		TSubclassOf<ASTUBaseWeapon> WeaponType;
+	TSubclassOf<ASTUBaseWeapon> WeaponType;
 
 	virtual bool CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const override;
 };
