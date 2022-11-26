@@ -30,5 +30,11 @@ protected:
 	FGameData GameData;
 
 private:
+	int32 CurrentRound = 1;
+	int32 CountRoundDown = 0;
+	FTimerHandle GameRoundTimerHandle;
+
+	void StartRound();
+	void GameTimerUpdate();
 	void SpawnBots();
 };
