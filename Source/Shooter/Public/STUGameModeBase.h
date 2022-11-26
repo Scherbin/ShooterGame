@@ -37,4 +37,7 @@ private:
 	void StartRound();
 	void GameTimerUpdate();
 	void SpawnBots();
+
+	void ResetPlayers();
+	void ResetOnePlayer(AController* Controller);
 };
