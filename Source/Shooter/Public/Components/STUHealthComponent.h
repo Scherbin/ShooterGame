@@ -67,4 +67,5 @@ protected:
 
 	 void PlayCameraShake();
 
+	 void Killed(AController* KillerController);
 };
