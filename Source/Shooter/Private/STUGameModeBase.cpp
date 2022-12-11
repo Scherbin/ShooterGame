@@ -9,6 +9,7 @@
 #include "Player/STUPlayerState.h"
 #include "STUUtils.h"
 #include "Components/STURespawnComponent.h"
+#include "EngineUtils.h"
 
 constexpr static int32 MinRoundTimeForRespawn = 10;
 
@@ -73,11 +74,11 @@ void ASTUGameModeBase::GameTimerUpdate()
 			ResetPlayers();
 			StartRound();
 		}
-	}
-	else
-	{
-		UE_LOG(LogTemp, Display, TEXT("=====GameOver===="));
-		LogPlayerInfo();
+
+		else
+		{
+			GameOver();
+		}
 	}
 }
 
@@ -191,4 +192,19 @@ void ASTUGameModeBase::StartRespawn(AController* Controller)
 	if (!RespawnComponent) return;
 
 	RespawnComponent->Respawn(GameData.RespawnTime);
+}
+
+void ASTUGameModeBase::GameOver()
+{
+	UE_LOG(LogTemp, Display, TEXT("=====GameOver===="));
+	LogPlayerInfo();
+
+	for (auto Pawn: TActorRange<APawn>(GetWorld()))
+	{
+		if (Pawn)
+		{
+			Pawn->TurnOff();
+			Pawn->DisableInput(nullptr);
+		}
+	}
 }
