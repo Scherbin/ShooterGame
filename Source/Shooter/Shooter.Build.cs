@@ -37,7 +37,9 @@ public class Shooter : ModuleRules
 		  "Shooter/Public/AI/EQS",
 		  "Shooter/Public/AI/Decorators",
 		  "Shooter/Public/Menu",
-		  "Shooter/Public/Menu/UI"
+		  "Shooter/Public/Menu/UI",
+		  "Shooter/Public/Sound",
+
 		});
 
 		// Uncomment if you are using Slate UI
