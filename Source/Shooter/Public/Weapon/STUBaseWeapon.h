@@ -30,6 +30,8 @@ public:
 	bool IsAmmoEmpty() const;
 	bool IsAmmoFull() const;
 
+	virtual void Zoom(bool Enabled) {}
+
 	FWeaponUIData GetUIData()const { return UIData; }
 	FAmmoData GetAmmoData() const { return CurrentAmmo; }
 
