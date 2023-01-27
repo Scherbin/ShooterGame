@@ -8,6 +8,7 @@
 #include "TimerManager.h"
 #include "STUGameModeBase.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
+#include "Perception/AISense_Damage.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogHealthComponent, All, All)
 
@@ -86,6 +87,7 @@ void USTUHealthComponent::ApplyDamage(float Damage, AController* InstygatedBy)
 	}
 
 	PlayCameraShake();
+	ReportDamageEvent( Damage, InstygatedBy);
 }
 
 void USTUHealthComponent::HealUpdate()
@@ -160,4 +162,12 @@ float USTUHealthComponent::GetPointDamageModifier(AActor* DamagedActor, const FN
 	if (!DamageModifier.Contains(PhysMaterial)) return 1.0f;
 
 	return DamageModifier[PhysMaterial];
+}
+
+void USTUHealthComponent::ReportDamageEvent(float Damage, AController* InstygatedBy)
+{
+	if (!InstygatedBy || !InstygatedBy->GetPawn() || !GetOwner()) return;
+
+	UAISense_Damage::ReportDamageEvent(GetWorld(), GetOwner(), InstygatedBy->GetPawn(), Damage, InstygatedBy->GetPawn()->GetActorLocation(),
+		                                                                                                    GetOwner()->GetActorLocation());
 }

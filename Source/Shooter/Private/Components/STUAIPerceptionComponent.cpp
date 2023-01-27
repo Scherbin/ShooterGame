@@ -1,5 +1,5 @@
 // Shooter, All Rights Reserved.
-
+#include "Perception/AISense_Damage.h"
 
 #include "Components/STUAIPerceptionComponent.h"
 #include "AIController.h"
@@ -7,11 +7,17 @@
 #include "Components/STUHealthComponent.h"
 #include "Perception/AISense_Sight.h"
 
+
+
 AActor* USTUAIPerceptionComponent:: GetClosestEnemy() const
 {
 	TArray<AActor*> PercieveActors;
 	GetCurrentlyPerceivedActors(UAISense_Sight::StaticClass(), PercieveActors);
-	if (PercieveActors.Num() == 0) return nullptr;
+	if (PercieveActors.Num() == 0)
+	{
+		GetCurrentlyPerceivedActors(UAISense_Damage::StaticClass(), PercieveActors);
+		if (PercieveActors.Num() == 0) return nullptr;
+	}
 
 	const auto Controller = Cast<AAIController>(GetOwner());
 	if (!Controller) return nullptr;
