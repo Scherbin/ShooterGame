@@ -11,9 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundCue.h"
 
-
 DEFINE_LOG_CATEGORY_STATIC(BaseCharacterLog, All, All)
-
 
 ASTUBase_Character::ASTUBase_Character(const FObjectInitializer& ObjInit)
 	:Super(ObjInit.SetDefaultSubobjectClass<USTUCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))

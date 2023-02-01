@@ -1,13 +1,10 @@
 // Shooter, All Rights Reserved.
-#include "Perception/AISense_Damage.h"
-
 #include "Components/STUAIPerceptionComponent.h"
+#include "Perception/AISense_Damage.h"
 #include "AIController.h"
 #include "STUUtils.h"
 #include "Components/STUHealthComponent.h"
 #include "Perception/AISense_Sight.h"
-
-
 
 AActor* USTUAIPerceptionComponent:: GetClosestEnemy() const
 {
