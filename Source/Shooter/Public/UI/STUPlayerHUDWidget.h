@@ -57,8 +57,11 @@ protected:
 
 	virtual void NativeOnInitialized() override;
 
-private:
+	UFUNCTION()
 	void OnHealthChanged(float Health, float HealthDelta);
+
+private:
+	
 	void OnNewPawn(APawn* NewPawn);
 	void UpdateHealthBar();
 };

@@ -31,8 +31,8 @@ void ASTUBase_Character::BeginPlay()
 	check(GetMesh());
 
 	OnHealthChanged(HealthComponent->GetHealth(), 0.0f);
-	HealthComponent->OnDeath.AddUObject(this, &ASTUBase_Character::OnDeath);
-	HealthComponent->OnHealthChanged.AddUObject(this, &ASTUBase_Character::OnHealthChanged);
+	HealthComponent->OnDeath.AddDynamic(this, &ASTUBase_Character::OnDeath);
+	HealthComponent->OnHealthChanged.AddDynamic(this, &ASTUBase_Character::OnHealthChanged);
 
 	LandedDelegate.AddDynamic(this, &ASTUBase_Character::OnGroundLanded);
 

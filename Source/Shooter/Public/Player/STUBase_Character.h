@@ -44,9 +44,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Sound")
 	USoundCue* DeathSound;
 
+	UFUNCTION()
 	virtual void OnDeath();
+
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
 	virtual void OnHealthChanged(float Health, float HealthDelta);
 
 

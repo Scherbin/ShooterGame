@@ -22,9 +22,9 @@ void USTUPlayerHUDWidget::NativeOnInitialized()
 void  USTUPlayerHUDWidget::OnNewPawn(APawn* NewPawn)
 {
 	const auto HealthComponent = STUUtils::GetSTUPlayerComponent<USTUHealthComponent>(NewPawn);
-	if (HealthComponent && !HealthComponent->OnHealthChanged.IsBoundToObject(this))
+	if (HealthComponent && !HealthComponent->OnHealthChanged.IsBound())
 	{
-		HealthComponent->OnHealthChanged.AddUObject(this, &USTUPlayerHUDWidget::OnHealthChanged);
+		HealthComponent->OnHealthChanged.AddDynamic(this, &USTUPlayerHUDWidget::OnHealthChanged);
 	}
 	UpdateHealthBar();
 }

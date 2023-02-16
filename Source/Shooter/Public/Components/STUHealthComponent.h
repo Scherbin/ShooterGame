@@ -18,7 +18,10 @@ public:
 
 	USTUHealthComponent();
 
+	UPROPERTY(BlueprintAssignable)
 	FONDeathSignature OnDeath;
+
+	UPROPERTY(BlueprintAssignable)
 	FOnHealthChanged OnHealthChanged;
 
 	UFUNCTION(BlueprintCallable, Category="Health")

@@ -46,8 +46,8 @@ struct FWeaponUIData
 };
 
 //Health
-DECLARE_MULTICAST_DELEGATE(FONDeathSignature);
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnHealthChanged, float, float);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FONDeathSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHealthChanged, float, Health, float, DeltaHealth);
 
 
 //VFX
