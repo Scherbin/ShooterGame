@@ -20,5 +20,6 @@ public:
 	const TArray< USTUGameSetting*>& GetVideoSettings() const;
 
 private:
+	UPROPERTY()
 	TArray< USTUGameSetting*> VideoSettings;
 };
