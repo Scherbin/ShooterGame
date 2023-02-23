@@ -6,6 +6,8 @@
 #include "GameFramework/GameUserSettings.h"
 #include "STUGameUserSettings.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FOnSettingUpdateDelegate);
+
 class USTUGameSetting;
 
 UCLASS()
@@ -18,6 +20,10 @@ public:
 	static USTUGameUserSettings* Get();
 
 	const TArray< USTUGameSetting*>& GetVideoSettings() const;
+
+	void RunBenchmark();
+
+	FOnSettingUpdateDelegate OnVideoSettingUpdate;
 
 private:
 	UPROPERTY()

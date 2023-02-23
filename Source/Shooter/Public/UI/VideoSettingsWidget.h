@@ -8,6 +8,7 @@
 
 class UVerticalBox;
 class USettingOptionWidget;
+class UButton;
 
 UCLASS()
 class SHOOTER_API UVideoSettingsWidget : public UUserWidget
@@ -16,10 +17,20 @@ class SHOOTER_API UVideoSettingsWidget : public UUserWidget
 	
 protected:
 	UPROPERTY(meta = (BindWidget))
+	UButton* RunBenchmarkButton;
+
+	UPROPERTY(meta = (BindWidget))
 	UVerticalBox* VideoSettingsContainer;
+
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "UI")
 	TSubclassOf<USettingOptionWidget> SettingOptionWidgetClass;
 
 	virtual void NativeOnInitialized() override;
+
+private:
+	UFUNCTION()
+	void OnBenchmark();
+
+	void OnVideoSettingsUpdate();
 };

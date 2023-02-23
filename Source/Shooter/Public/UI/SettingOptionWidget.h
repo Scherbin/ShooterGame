@@ -8,6 +8,7 @@
 
 class UTextBlock;
 class USTUGameSetting;
+class UButton;
 
 UCLASS()
 class SHOOTER_API USettingOptionWidget : public UUserWidget
@@ -21,6 +22,12 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* SettingCurrentValue;
 
+	UPROPERTY(meta = (BindWidget))
+	UButton* NextSettingButton;
+
+	UPROPERTY(meta = (BindWidget))
+	UButton* PrevSettingButton;
+
 	virtual void NativeOnInitialized() override;
 
 private:
@@ -28,6 +35,12 @@ private:
 
 	void Init(USTUGameSetting* InSetting);
 	void UpdateTexts();
+
+	UFUNCTION()
+	void OnNextSetting();
+
+	UFUNCTION()
+	void OnPrevSetting();
 
 	friend class UVideoSettingsWidget;
 };
