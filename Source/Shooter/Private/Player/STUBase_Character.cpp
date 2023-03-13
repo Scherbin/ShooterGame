@@ -100,3 +100,16 @@ bool ASTUBase_Character::IsRunning() const
 {
 	return false;
 }
+
+void ASTUBase_Character::TurnOff()
+{
+	WeaponComponent->StopFire();
+	WeaponComponent->Zoom(false);
+	Super::TurnOff();
+}
+void ASTUBase_Character::Reset()
+{
+	WeaponComponent->StopFire();
+	WeaponComponent->Zoom(false);
+	Super::Reset();
+}
